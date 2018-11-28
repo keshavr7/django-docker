@@ -1,0 +1,30 @@
+version: '2'
+services:
+    web:
+        build: .
+        command: python dj_root/manage.py runserver 0.0.0.0:8000
+        ports:
+            - "8000:8000"
+        env_file: dj_root/.env
+        depends_on:
+            - db
+            - redis
+        volumes:
+            - .:/app
+    db:
+        image: "postgres:9.6"
+        ports:
+            - "5432:5432"
+    redis:
+        image: redis:alpine
+        ports:
+            - "6379:6379"
+    celery:
+        build: .
+        command: celery worker --app=www --workdir=dj_root --loglevel=INFO --beat --without-gossip --without-mingle --without-heartbeat
+        env_file: dj_root/.env
+        volumes:
+            - .:/app
+        depends_on:
+            - db
+            - redis
