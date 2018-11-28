@@ -4,10 +4,7 @@ Dockerised Django App with Postgres, Redis and Celery
 
 ## Setup
 
-1) Create a .env in dj_root directory
-
-Sample .env file. No API keys or tokens, safe to share :)
-Feel free to change Postgres DB instance
+1) Create a .env in dj_root directory. Sample .env file:
 
     BROKER_CONNECTION_TIMEOUT=30
     BROKER_HEARTBEAT=30
