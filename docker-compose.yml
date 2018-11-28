@@ -2,7 +2,7 @@ version: '2'
 services:
     web:
         build: .
-        command: python dj_root/manage.py runserver 0.0.0.0:8000
+        command: bash -c "python dj_root/manage.py migrate --noinput && python dj_root/manage.py runserver 0.0.0.0:8000"
         ports:
             - "8000:8000"
         env_file: dj_root/.env
